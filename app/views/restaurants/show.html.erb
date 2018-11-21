@@ -1,0 +1,28 @@
+  <h2><%= @restaurant.name %></h2>
+  <br>
+  <h3>Address: <%= @restaurant.address %>  --- <%= @restaurant.category.capitalize %> Food</h3>
+  <br>
+
+  <h4>Reviews</h4>
+
+  <p>Average:
+    <% sum = 0 %>
+    <% @restaurant.reviews.each do |review| %>
+    <% sum += review.rating %>
+    <% end %>
+    <% if @restaurant.reviews.length.zero? %>
+    <%= 0 %>
+    <% else %>
+    <% average = sum / @restaurant.reviews.length  %>
+    <%= average %>
+    <% end %>
+  </p>
+
+  <% @restaurant.reviews.each do |review| %>
+    <p><%= review.content %> --> <%= review.rating %></p>
+  <% end %>
+  <br>
+
+<%= link_to "Back to restaurants", restaurants_path, class: "btn btn-primary" %>
+  <br>
+<%= link_to "Add a review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
